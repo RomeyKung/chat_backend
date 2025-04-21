@@ -14,17 +14,17 @@ export class UsersService {
   }
 
   async create(createUserInput: CreateUserInput) {
-    try {
+    //try {                           ===> I fixed by myself by this try catch but let u just re-check again ty.
       return await this.usersRepository.create({
         ...createUserInput,
         password: await this.hashPassword(createUserInput.password),
       });
-    } catch (error) {
-      if (error instanceof MongoServerError && error.code === 11000) {
-        throw new ConflictException("Email already exists");
-      }
-      throw new InternalServerErrorException("Something went wrong");
-    }
+    //} catch (error) {
+    //   if (error instanceof MongoServerError && error.code === 11000) {
+    //     throw new ConflictException("Email already exists");
+    //   }
+    //   throw new InternalServerErrorException("Something went wrong");
+    // }
   }
 
   async findAll() {
