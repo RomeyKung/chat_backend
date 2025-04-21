@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ModelDefinition, MongooseModule } from "@nestjs/mongoose";
+import { DbMigrationService } from "./db-migration.service";
 
 @Module({
   imports: [
@@ -11,9 +12,7 @@ import { ModelDefinition, MongooseModule } from "@nestjs/mongoose";
       inject: [ConfigService],
     }),
   ],
-  controllers: [],
-  providers: [],
-  exports: [],
+  providers: [DbMigrationService],
 })
 export class DatabaseModule {
   //this module is responsible for connecting to the MongoDB database using Mongoose.

@@ -22,6 +22,7 @@ export class User extends AbstractEntity {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
 //SchemaFactory is a utility function provided by Mongoose to create a schema from a class.
 //It automatically generates the schema based on the class properties and their decorators.
 //The createForClass function takes the class as an argument and returns a Mongoose schema.

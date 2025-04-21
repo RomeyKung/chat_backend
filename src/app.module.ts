@@ -8,11 +8,11 @@ import * as Joi from "joi";
 import { DatabaseModule } from "./common/database/database.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { UsersModule } from './users/users.module';
+import { UsersModule } from "./users/users.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
-    // UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -20,7 +20,7 @@ import { UsersModule } from './users/users.module';
         NODE_ENV: Joi.string().valid("development", "production", "test").default("development"),
         DATABASE_URL: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
-        JWT_EXPIRES_IN: Joi.string().default("1d"),
+        JWT_EXPIRES_IN: Joi.string().default("3600"),
       }),
     }),
     LoggerModule.forRootAsync({
@@ -51,6 +51,7 @@ import { UsersModule } from './users/users.module';
       debug: true,
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
